@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<string_table>
+    
+	<string id="st_loadout_army_sniper">
+		<text>SSU Sniper</text>
+	</string>
+	<string id="st_loadout_army_sniper_desc">
+		<text>You are a soldier with the SSU, providing the combat role of designated marksman. Your equipment is designed to allow you to operate in the field for a long time and accurately place fire from distances that protect you from retaliation. In the Zone, your duties are to keep watch with your rifle and scope and to provide fire support to close engagement squads.</text>
+	</string>
+	<string id="st_loadout_army_quartermaster">
+		<text>SSU Supply Officer</text>
+	</string>
+	<string id="st_loadout_army_quartermaster_desc">
+		<text>You are a back-line person with the SSU, responsible for ensuring the flow of supplies and equipment is accounted for. What a damn disgrace, they didn't even issue you a rifle. At least you were able to pinch a few items that no one will go looking for - perhaps those stalkers would pay a handsome price for them...</text>
+	</string>
+	<string id="st_loadout_loner_newbie">
+		<text>Rookie</text>
+	</string>
+	<string id="st_loadout_loner_newbie_desc">
+		<text>You have heard the stories of the Zone. Having nothing, you decided to scrape up what you could and ran to the Zone with all you could carry. With nothing but a Makarov and some cupboard goodies, you set out to write your legend.</text>
+	</string>
+	<string id="st_loadout_loner_hunter">
+		<text>Hunter</text>
+	</string>
+	<string id="st_loadout_loner_hunter_desc">
+		<text>You were a local forester in the area near the Zone. One day, your curiosity and your coworker's stories have gotten the better of you, so you decided to make your way in and see what you could find. Maybe at least, you'll come back with something nice to hang on your wall.</text>
+	</string>
+	<string id="st_loadout_loner_crook">
+		<text>Gangster</text>
+	</string>
+	<string id="st_loadout_loner_crook_desc">
+		<text>You fell in with the wrong people back in the Great Land, and now they are looking for you. Your wife and son are safe in Krakow with family, but you need money and can't show your face lest they find you. Well, you made your name as a killer, time to get to work.</text>
+	</string>
+	<string id="st_loadout_random">
+		<text>Random</text>
+	</string>
+	<string id="st_loadout_random_desc">
+		<text>Who were you exactly? Who knows. But you have a bunch of random stuff. Good luck!</text>
+	</string>
+	<string id="st_loadout_random">
+		<text>Random with a Gun</text>
+	</string>
+	<string id="st_loadout_random_desc">
+		<text>Who were you exactly? Who knows. But you have a bunch of random stuff, and a gun! Good luck!</text>
+	</string>
+</string_table>

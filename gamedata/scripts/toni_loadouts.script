@@ -1,3 +1,6 @@
+-- Leverage this to read sections from loadouts
+local ini_loadouts = ini_file("items\\settings\\importer.ltx")
+
 NewGame = itms_manager.new_game_equippment
 function itms_manager.new_game_equippment()
     -- tricky, we want this to fire to enable mags compat but also we don't want this to take effect
@@ -19,6 +22,9 @@ end
 -- open the box, accumulate post-open stuff in a table to pass
 function open_box(itm)
     local tbl = {}
+    -- Determine loadout and provide the player with items using alife_create(item, db.actor)
+    -- your code here
+
 
     CreateTimeEvent("custom_loadouts", "create_loadout", 0, patch_open, tbl)
 end
@@ -33,7 +39,10 @@ end
 -- this should handle reassignment of conditions and other custom stuff we want to do
 -- arg is a map of ids to custom conds and actions
 function post_open(tbl)
-    
+    -- iterate through the table, pull IDs and apply any post-creation changes (like condition)
+    -- the new game func will set random conditions, we want to use custom ones
+
+
     -- autosave to override the original
 	exec_console_cmd("save " .. user_name() .. " - autosave")
     return true
