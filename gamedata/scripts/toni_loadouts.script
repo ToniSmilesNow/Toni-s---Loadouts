@@ -1,0 +1,40 @@
+NewGame = itms_manager.new_game_equippment
+function itms_manager.new_game_equippment()
+    -- tricky, we want this to fire to enable mags compat but also we don't want this to take effect
+    local to_open = nil
+    db.actor:iterate_inventory(function(actor,itm)
+        local sec = itm:section()
+        if SYS_GetParam(1, sec, "loadout_item") then
+            -- mark for release
+            to_open = itm
+        end
+    end)
+    if to_open then
+        -- just let this run
+        open_box(itm)
+    else
+    end
+end
+
+-- open the box, accumulate post-open stuff in a table to pass
+function open_box(itm)
+    local tbl = {}
+
+    CreateTimeEvent("custom_loadouts", "create_loadout", 0, patch_open, tbl)
+end
+
+-- this is just letting the original function run to allow for mags compat, passthrough to post open
+function patch_open(tbl)
+    NewGame()
+    CreateTimeEvent("custom_loadouts", "create_loadout", 0, post_open, tbl)
+    return true
+end
+
+-- this should handle reassignment of conditions and other custom stuff we want to do
+-- arg is a map of ids to custom conds and actions
+function post_open(tbl)
+    
+    -- autosave to override the original
+	exec_console_cmd("save " .. user_name() .. " - autosave")
+    return true
+end
