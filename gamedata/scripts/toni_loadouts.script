@@ -2,48 +2,52 @@
 local ini_loadouts = ini_file("items\\settings\\importer.ltx")
 
 NewGame = itms_manager.new_game_equippment
+
+local tbl = {}
 function itms_manager.new_game_equippment()
     -- tricky, we want this to fire to enable mags compat but also we don't want this to take effect
-    local to_open = nil
-    db.actor:iterate_inventory(function(actor,itm)
-        local sec = itm:section()
-        if SYS_GetParam(1, sec, "loadout_item") then
-            -- mark for release
-            to_open = itm
+    if not has_alife_info("loadout_handled") then
+        printf("Handling loadout")
+        give_info("loadout_handled")
+        local to_open = nil
+        db.actor:iterate_inventory(function(actor,itm)
+            local sec = itm:section()
+            printf("Analyzing %s", sec)
+            if SYS_GetParam(0, sec, "loadout_section") then
+                -- mark for release
+                printf("Marked item %s", sec)
+                to_open = itm
+            end
+        end, db.actor)
+        if to_open then
+            open_box(to_open)
+            alife_release_id(to_open:id())
+            return false
         end
-    end)
-    if to_open then
-        -- just let this run
-        open_box(itm)
-    else
     end
+    NewGame()
+    post_open()
+    return true
 end
 
--- open the box, accumulate post-open stuff in a table to pass
+-- open the box, accumulate post-open stuff in tbl
 function open_box(itm)
-    local tbl = {}
     -- Determine loadout and provide the player with items using alife_create(item, db.actor)
     -- your code here
+    printf("Enjoy your free pron!")
+    alife_create_item("porn", db.actor)
 
-
-    CreateTimeEvent("custom_loadouts", "create_loadout", 0, patch_open, tbl)
-end
-
--- this is just letting the original function run to allow for mags compat, passthrough to post open
-function patch_open(tbl)
-    NewGame()
-    CreateTimeEvent("custom_loadouts", "create_loadout", 0, post_open, tbl)
-    return true
 end
 
 -- this should handle reassignment of conditions and other custom stuff we want to do
 -- arg is a map of ids to custom conds and actions
-function post_open(tbl)
+function post_open()
     -- iterate through the table, pull IDs and apply any post-creation changes (like condition)
     -- the new game func will set random conditions, we want to use custom ones
 
 
     -- autosave to override the original
-	exec_console_cmd("save " .. user_name() .. " - autosave")
+	-- exec_console_cmd("save " .. user_name() .. " - autosave")
+    empty_table(tbl)
     return true
 end
